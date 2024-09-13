@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configurar CORS
 app.use(cors({
-  origin: 'http://localhost:5173', // Reemplaza con la URL de tu frontend
+  origin: 'https://task-web-elisum1s-projects.vercel.app/', // Reemplaza con la URL de tu frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true, // Si necesitas enviar cookies con las solicitudes
 }));
