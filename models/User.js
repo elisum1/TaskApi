@@ -26,6 +26,14 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  resetToken: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  resetTokenExpiry: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
   profilePhoto: {  // Corregido aquí
     type: DataTypes.STRING,
     allowNull: true,
@@ -33,5 +41,26 @@ const User = sequelize.define('User', {
 }, {
   timestamps: true // Si deseas que se creen campos de fecha de creación y actualización
 });
+
+// Métodos adicionales para el manejo de tokens de reseteo
+User.findByResetToken = function (token) {
+  if (!token) {
+    throw new Error('Reset token is required');
+  }
+  
+  return this.findOne({
+    where: {
+      resetToken: token,
+      resetTokenExpiry: { [Op.gt]: new Date() } // Verifica si el token no ha expirado
+    }
+  });
+};
+
+User.updateResetToken = function (userId, token, expiry) {
+  return this.update(
+    { resetToken: token, resetTokenExpiry: expiry },
+    { where: { id: userId } }
+  );
+};
 
 module.exports = User;

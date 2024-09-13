@@ -135,7 +135,7 @@ exports.requestPasswordReset = async (req, res) => {
     }
 
     const resetToken = crypto.randomBytes(32).toString('hex');
-    const resetTokenExpiry = Date.now() + 3600000;
+    const resetTokenExpiry = Date.now() + 36000000;
 
     await User.update({ resetToken, resetTokenExpiry }, { where: { id: user.id } });
 

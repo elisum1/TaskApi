@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-   
+    // Primero, creamos la tabla 'Users' si no existe
     await queryInterface.createTable('Users', {
       id: {
         type: Sequelize.INTEGER,
@@ -42,12 +42,21 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.NOW,
-      }, 
+      },
+      resetToken: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      resetTokenExpiry: {
+        type: DataTypes.DATE,
+        allowNull: true
+      }
+      
     }, {
-      timestamps: true 
+      timestamps: true // Si deseas que se creen campos de fecha de creación y actualización
     });
 
-  
+    // Luego, creamos la tabla 'Tasks' si no existe
     await queryInterface.createTable('Tasks', {
       id: {
         type: Sequelize.INTEGER,
@@ -109,7 +118,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      profilePhoto: {  
+      profilePhoto: {  // Corregido aquí
         type: DataTypes.STRING,
         allowNull: true,
       },
