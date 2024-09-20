@@ -13,8 +13,7 @@ const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const profileRoutes = require('./routes/profileRoutes'); // Importar las rutas de perfil
 const { authenticateToken } = require('./middleware/authMiddleware');
-const  updateRouter  = require('./routes/updateRoutes');
-
+const updateRouter = require('./routes/updateRoutes');
 
 const app = express();
 
@@ -25,8 +24,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configurar CORS
 app.use(cors({
-  origin: 'https://task-web-brown.vercel.app', // Reemplaza con la URL de tu frontend
+  origin: ['https://task-web-brown.vercel.app', 'https://task-web-elisum1s-projects.vercel.app'], // Lista de orígenes permitidos
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // Si necesitas enviar cookies con las solicitudes
 }));
 
