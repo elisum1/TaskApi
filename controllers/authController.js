@@ -139,7 +139,7 @@ exports.requestPasswordReset = async (req, res) => {
 
     await User.update({ resetToken, resetTokenExpiry }, { where: { id: user.id } });
 
-    const resetUrl = `http://localhost:3001/api/auth/reset-password/${resetToken}`;
+    const resetUrl = `https://taskapi-7z2t.onrender.com/api/auth/reset-password/${resetToken}`;
 
     await transporter.sendMail({
       to: email,

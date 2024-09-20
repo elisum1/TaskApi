@@ -193,7 +193,7 @@ router.post('/reset-password', async (req, res) => {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     await User.update({ password: hashedPassword, resetToken: null, resetTokenExpiry: null }, { where: { id: user.id } });
 
-    res.redirect('http://localhost:5173'); 
+    res.redirect('https://task-web-brown.vercel.app'); 
   } catch (error) {
     console.error('Error al restablecer la contraseña:', error);
     res.status(500).json({ message: 'Error al restablecer la contraseña' });
